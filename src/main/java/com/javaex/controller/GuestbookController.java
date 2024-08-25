@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.javaex.service.GuestbookService;
 import com.javaex.vo.GuestbookVo;
@@ -47,7 +48,34 @@ public class GuestbookController {
 		
 		return "redirect:/guestbook/addlist";
 	}
-	
-	
+	/* 삭제폼 이동 */
+	@RequestMapping(value = "guestbook/deleteform", method = { RequestMethod.GET, RequestMethod.POST })
+	public String deleteform(@RequestParam(value = "no") int no, Model model) {
+		
+		System.out.println("GuestbookController.deleteform()");
 
+		// 삭제할 항목의 번호를 모델에 추가: 별명을 잊지말것.
+		model.addAttribute("no", no);
+
+		return "guestbook/deleteForm";
+	}
+
+	/* 삭제 */
+	@RequestMapping(value = "guestbook/delete", method = { RequestMethod.GET, RequestMethod.POST })
+	public String delete(@RequestParam(value = "no") int no, @RequestParam(value = "password") String password) {
+		
+		boolean success = guestbookService.exeGuestbookDelete(no, password);
+		
+		System.out.println(success+ "삭제 컨트롤러 발동");
+		
+		if (success) {
+			
+			return "redirect:/guestbook/addlist";
+			
+		} else {
+			
+			return "redirect:/guestbook/deleteform?no=" + no + "&error=true";
+			
+		}
+	}
 }

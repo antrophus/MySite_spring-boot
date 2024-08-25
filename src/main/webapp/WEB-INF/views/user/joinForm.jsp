@@ -20,9 +20,9 @@
 			<div id="aside">
 				<h2>회원</h2>
 				<ul>
-					<li>회원정보</li>
-					<li>로그인</li>
-					<li>회원가입</li>
+					<li><a href="${pageContext.request.contextPath}/user/modifyform">회원정보</a></li>
+					<li><a href="${pageContext.request.contextPath}/user/loginform">로그인</a></li>
+					<li><a href="${pageContext.request.contextPath}/user/joinform">회원가입</a></li>
 				</ul>
 			</div>
 			<!-- //aside -->
@@ -33,9 +33,9 @@
 					<h3>회원가입</h3>
 					<div id="location">
 						<ul>
-							<li>홈</li>
-							<li>회원</li>
-							<li class="last">회원가입</li>
+							<li><a href="${pageContext.request.contextPath}/main">홈</a></li>
+							<li><a href="${pageContext.request.contextPath}/user/loginform">회원</a></li>
+							<li class="last"><a href="${pageContext.request.contextPath}/user/joinform">회원가입</a></li>
 						</ul>
 					</div>
 					<div class="clear"></div>

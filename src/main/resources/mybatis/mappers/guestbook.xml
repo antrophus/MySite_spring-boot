@@ -19,9 +19,30 @@
 		<![CDATA[
 		select	no 
 				,name
+				,password
         		,reg_date as regDate
         		,content
 		from guestbook
 		]]>
 	</select>
+	
+	<!-- 특정 방명록 항목 가져오기 (no로 조회) 삭제할 데이터 조회용 -->
+	<select id="selectOne" parameterType="int" resultType="com.javaex.vo.GuestbookVo">
+		<![CDATA[
+		select  no 
+				,password
+		from guestbook
+		where no = #{no}
+		]]>
+	</select>
+	
+	<!-- 방명록 삭제 -->
+	<delete id="delete" parameterType="map">
+    	<![CDATA[
+    	delete from guestbook
+   	 	where no = #{no}
+    	and password = #{password}
+    	]]>
+	</delete>
+	
 </mapper>

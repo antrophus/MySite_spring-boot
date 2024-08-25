@@ -2,7 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <!DOCTYPE html>
-<html>
+<html lang="ko">
 <head>
 <meta charset="UTF-8">
 <title>MySite-로그인</title>
@@ -19,9 +19,9 @@
 			<div id="aside">
 				<h2>회원</h2>
 				<ul>
-					<li>회원정보</li>
-					<li>로그인</li>
-					<li>회원가입</li>
+					<li><a href="${pageContext.request.contextPath}/user/modifyform">회원정보</a></li>
+					<li><a href="${pageContext.request.contextPath}/user/loginform">로그인</a></li>
+					<li><a href="${pageContext.request.contextPath}/user/joinform">회원가입</a></li>
 				</ul>
 			</div>
 			<!-- //aside -->
@@ -32,9 +32,9 @@
 					<h3>로그인</h3>
 					<div id="location">
 						<ul>
-							<li>홈</li>
-							<li>회원</li>
-							<li class="last">로그인</li>
+							<li><a href="${pageContext.request.contextPath}/main">홈</a></li>
+							<li><a href="${pageContext.request.contextPath}/user/loginform">회원</a></li>
+							<li class="last"><a href="${pageContext.request.contextPath}/user/loginform">로그인</a></li>
 						</ul>
 					</div>
 					<div class="clear"></div>
