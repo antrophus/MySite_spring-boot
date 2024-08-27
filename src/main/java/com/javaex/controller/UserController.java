@@ -61,6 +61,7 @@ public class UserController {
 		
 		//로그인
 		session.setAttribute("authUser", authUser);
+		System.out.println(authUser + "이것은 로그인한 회원의 세션정보");
 		
 		//메인페이지로 리다이렉트
 		return "redirect:/main";
@@ -98,21 +99,20 @@ public class UserController {
 
 	/* 회원정보수정 */
 	@RequestMapping(value = "/user/modify", method = { RequestMethod.GET, RequestMethod.POST })
-	public String modify(@ModelAttribute UserVo userVo, HttpSession session, Model model) {
+	public String modify(@ModelAttribute UserVo userVo, HttpSession session) {
 		System.out.println("UserController.modify()");
 		
-		//로그인된 회원 정보 가져오기
+		//로그인된 회원 정보를 session에서 가져오기
 		UserVo authUser = (UserVo) session.getAttribute("authUser");
-		
+		//이름을 가져와서 메인 화면에 출력
+//		authUser.setName(userVo.getName());
+
 		//authUser의 ID를 유지하고 수정된 정보를 적용
 		userVo.setId(authUser.getId());
 		userService.exeModify(userVo);
-		
-		//세션의 사용자 정보 업데이트
+//		
+		//세션의 사용자 정보 수정 내용 업데이트
 		session.setAttribute("authUser", userVo);
-		
-		//수정된 정보를 모델에 추가하여 뷰에서 사용할 수 있게 함
-		model.addAttribute("authUser", userVo);
 		
 		return "redirect:/main";
 	}

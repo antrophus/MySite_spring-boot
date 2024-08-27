@@ -53,12 +53,12 @@
 
 							<!-- 비밀번호 -->
 							<div class="form-group">
-								<label class="form-text" for="input-pass">패스워드</label> <input type="text" id="input-pass" name="password" value="" placeholder="비밀번호를 입력하세요">
+								<label class="form-text" for="input-pass">패스워드</label> <input type="text" id="input-pass" name="password" value="" placeholder="${sessionScope.authUser.password}">
 							</div>
 
 							<!-- 이메일 -->
 							<div class="form-group">
-								<label class="form-text" for="input-name">이름</label> <input type="text" id="input-name" name="name" value="" placeholder="이름을 입력하세요">
+								<label class="form-text" for="input-name">이름</label> <input type="text" id="input-name" name="name" value="" placeholder="${sessionScope.authUser.name}">
 							</div>
 
 							<!-- //나이 -->

@@ -58,7 +58,7 @@
 								<td><a href="${pageContext.request.contextPath}/main">[메인으로 돌아가기]</a></td>
 							</tr>
 						</table>
-						<input type='hidden' name="no" value="${no}" placeholder="deleteForm 파라미터로 넘겨준 no">
+						<input type='hidden' name="no" value="${param.no}" placeholder="deleteForm 파라미터로 넘겨준 no">
 					</form>
 					
 				</div>

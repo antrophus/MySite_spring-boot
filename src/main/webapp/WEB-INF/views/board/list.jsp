@@ -39,7 +39,7 @@
 					<div class="clear"></div>
 				</div>
 				<!-- //content-head -->
-	
+
 				<div id="board">
 					<div id="list">
 						<form action="${pageContext.request.contextPath}/board/list" method="get">
@@ -48,7 +48,7 @@
 								<button type="submit" id=btn_search>검색</button>
 							</div>
 						</form>
-						<table >
+						<table>
 							<thead>
 								<tr>
 									<th>번호</th>
@@ -59,21 +59,23 @@
 									<th>관리</th>
 								</tr>
 							</thead>
-							
+
 							<c:forEach items="${requestScope.boardList }" var="boardVo">
-							<tbody>
-								<tr>
-									<td>${boardVo.no}</td>
-									<td class="text-left"><a href="#">${boardVo.title}</a></td>
-									<td>${boardVo.name}</td>
-									<td>${boardVo.hit}</td>
-									<td>${boardVo.regDate}</td>
-									<td><a href="">[삭제]</a></td>
-								</tr>
-							</tbody>
+								<tbody>
+									<tr>
+										<td>${boardVo.no}</td>
+										<td class="text-left"><a href="${pageContext.request.contextPath}/board/read?no=${boardVo.no}">${boardVo.title}</a></td>
+										<td>${boardVo.name}</td>
+										<td>${boardVo.hit}</td>
+										<td>${boardVo.regDate}</td>
+										<c:if test="${sessionScope.authUser.no == boardVo.userNo}">
+											<td><a href="${pageContext.request.contextPath}/board/delete?no=${boardVo.no}">[삭제]</a></td>
+										</c:if>
+									</tr>
+								</tbody>
 							</c:forEach>
 						</table>
-						
+
 						<div id="paging">
 							<ul>
 								<li><a href="">◀</a></li>
@@ -89,12 +91,13 @@
 								<li><a href="">10</a></li>
 								<li><a href="">▶</a></li>
 							</ul>
-							
-							
+
+
 							<div class="clear"></div>
 						</div>
-						<a id="btn_write" href="">글쓰기</a>
-					
+						<c:if test="${sessionScope.authUser != null}">
+							<a id="btn_write" href="${pageContext.request.contextPath}/board/writeForm">글쓰기</a>
+						</c:if>
 					</div>
 					<!-- //list -->
 				</div>
@@ -104,7 +107,7 @@
 
 		</div>
 		<!-- //container  -->
-		
+
 
 		<!-- footer -->
 		<c:import url="/WEB-INF/views/include/footer.jsp"></c:import>

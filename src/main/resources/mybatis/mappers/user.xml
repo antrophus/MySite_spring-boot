@@ -15,7 +15,20 @@
 		<![CDATA[
 		select  no
 				,id
+				,password
 				,name
+		from users
+		where id = #{id}
+		and password = #{password}
+		]]>
+	</select>
+	
+	<select id="selectPersonOne" parameterType="com.javaex.vo.UserVo" resultType="com.javaex.vo.UserVo">
+		<![CDATA[
+		select  no
+				,id
+				,name
+				,password
 		from users
 		where id = #{id}
 		and password = #{password}

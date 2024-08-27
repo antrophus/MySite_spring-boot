@@ -50,12 +50,10 @@ public class GuestbookController {
 	}
 	/* 삭제폼 이동 */
 	@RequestMapping(value = "guestbook/deleteform", method = { RequestMethod.GET, RequestMethod.POST })
-	public String deleteform(@RequestParam(value = "no") int no, Model model) {
+	public String deleteform() {
 		
 		System.out.println("GuestbookController.deleteform()");
-
-		// 삭제할 항목의 번호를 모델에 추가: 별명을 잊지말것.
-		model.addAttribute("no", no);
+//		삭제폼만 불러올거임. 파라미터의 no는 jsp에서 ${param.no}로 추출하면 됨.
 
 		return "guestbook/deleteForm";
 	}
