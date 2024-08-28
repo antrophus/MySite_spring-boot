@@ -5,12 +5,15 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.javaex.service.BoardService;
 import com.javaex.vo.BoardVo;
+
+import jakarta.servlet.http.HttpSession;
 
 
 
@@ -59,13 +62,33 @@ public class BoardController {
 		
 	}
 	
-	/* 게시글 쓰기 */
+	/* 게시글 작성폼 */
 	@RequestMapping(value = "/board/writeForm", method = { RequestMethod.GET, RequestMethod.POST })
 	public String writeForm() {
 		System.out.println("BoardController.writeForm");
 
 		return "board/writeForm";
 	}
-	
+	/*게시글 작성*/
+	@RequestMapping(value = "/board/write", method = { RequestMethod.GET, RequestMethod.POST })
+	public String write(@RequestParam(value = "no") int no, @ModelAttribute BoardVo boardVo) {
+		System.out.println("BoardController.write" + no + "번 회원이 글작성을 누름");
+		
+		boardService.exeBoardWrite(boardVo);
+		
+		return "redirect:/board/list";
+	}
+	/* 게시글 수정폼 */
+	@RequestMapping(value = "/board/modifyform", method = { RequestMethod.GET, RequestMethod.POST })
+	public String modifyForm(@RequestParam(value = "no") int no, Model model, HttpSession session) {
+		System.out.println("BoardController.modifyForm");
+		//다오가 주고 서비스가 받아온 게시글 정보를 담아.
+		BoardVo boardVo = boardService.exeModifyForm(no);
+		System.out.println(boardVo + "파라미터 받아서 수정할 게시글의 내용을 뽑아야해");
+		//담은 게시글 정보를 어트리뷰트에 담아서 화면에 뿌려.
+		model.addAttribute("boardVo", boardVo);
+		//포워딩해.
+		return "board/modifyForm";
+	}
 	
 }

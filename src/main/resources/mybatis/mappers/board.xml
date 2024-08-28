@@ -35,7 +35,7 @@
 				,b.title
         		,b.content
         		,b.hit
-        		,b.reg_date
+        		,b.reg_date as regDate
         		,u.name
         		,b.user_no as userNo
 		from board b
@@ -44,13 +44,37 @@
 		]]>
 	</select>
 	
+	<select id="getBoardByNo" parameterType="int" resultType="com.javaex.vo.BoardVo">
+		<![CDATA[  
+        select 	b.no
+				,b.title
+        		,b.content
+        		,b.hit
+        		,b.reg_date as regDate
+        		,u.name
+        		,b.user_no as userNo
+		from board b
+		join users u on b.user_no = u.no
+		where b.no = #{no}
+		]]>  
+    </select>  
+	
+	<!-- 조회수 증가 -->
+	 <update id="updateHit" parameterType="int">
+        <![CDATA[
+        update board
+        		set hit = hit + 1
+        		where no = #{no}
+        ]]>
+    </update>
+	
 	<!-- 게시글 작성 -->
 	<insert id="insertBoard" parameterType="com.javaex.vo.BoardVo">
 		<![CDATA[
 		insert into board (title, content, user_no)
 		value( 	 #{title}
 				,#{content}
-        		,#{userNo}
+        		,#{no}
 			  )
 		]]>
 	</insert>
@@ -63,5 +87,8 @@
     	]]>
 	</delete>
 	
+	<!-- 게시글 수정-->
+	
+		
 	
 </mapper>
