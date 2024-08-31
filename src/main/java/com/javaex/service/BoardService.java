@@ -29,20 +29,22 @@ public class BoardService {
 		boardDao.updateHit(no);
 		//게시글 가져오기
 		BoardVo boardRead = boardDao.getBoardRead(no);
-		System.out.println(boardRead + "서비스는 받았다 게시글의 번호");
+		System.out.println("서비스 읽기:"+ boardRead);
 		return boardRead;
 	}
 	
 	
 	
 	/* 삭제 */
-	public void deleteBoard(int no) {
+	public int deleteBoard(int no) {
 		//컨트롤러가 준 no를 다오한테 넘겨주고 다오의 게시글 삭제 메소드 발동!
-		boardDao.deleteBoard(no);
+		int count = boardDao.deleteBoard(no);
+		
+		return count;
 	}
+	
 	/* 글 작성 */
 	public int exeBoardWrite(BoardVo boardVo) {
-		System.out.println("BoardService.exeBoardWrite.exeBoardWrite()");
 		
 		int count = boardDao.insertBoard(boardVo);
 		
@@ -52,6 +54,17 @@ public class BoardService {
 	/* 글 수정폼 */
 	public BoardVo exeModifyForm(int no) {
 		//다오 호출해서 게시글 정보 가져와
-		return boardDao.getModifyForm(no);
+		BoardVo boardVo = boardDao.getModifyForm(no);
+		
+		return boardVo;
+	}
+	
+	/* 글 수정 */
+	public int exeModifyBoard(BoardVo boardVo) {
+		
+		int count = boardDao.updateBoard(boardVo);
+		
+		return count;
+		
 	}
 }

@@ -29,7 +29,7 @@
 	</select>
 	
 	<!-- 게시글 읽기 -->
-	<select id="selectOne" parameterType="com.javaex.vo.BoardVo" resultType="com.javaex.vo.BoardVo">
+	<select id="selectOne" parameterType="int" resultType="com.javaex.vo.BoardVo">
 		<![CDATA[
 		select 	b.no
 				,b.title
@@ -40,7 +40,7 @@
         		,b.user_no as userNo
 		from board b
 		join users u on b.user_no = u.no
-		where b.no = #{b.no}
+		where b.no = #{no}
 		]]>
 	</select>
 	
@@ -88,6 +88,15 @@
 	</delete>
 	
 	<!-- 게시글 수정-->
+	<update id="update" parameterType="com.javaex.vo.BoardVo">
+		<![CDATA[
+		update board set 
+				no = #{no}
+				,title = #{title} 
+				,content = #{content}
+        where no = #{no}
+		]]>
+	</update>
 	
 		
 	

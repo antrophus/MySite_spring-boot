@@ -33,13 +33,15 @@ public class BoardDao {
 		//하나의 게시물에 여러 종류의 데이터가 있을때 게시물 번호 하나만 불러오면 된다.
 		BoardVo boardRead = sqlSession.selectOne("board.selectOne", no);
 		
-		System.out.println(boardRead + "다오는 읽었다. 디비에서");
+		System.out.println("다오 읽기:" + boardRead);
 		
 		return boardRead;
 	}
 	/* 조회수 증가 */
-	public void updateHit(int no) {
-		sqlSession.update("board.updateHit", no);
+	public int updateHit(int no) {
+		int count = sqlSession.update("board.updateHit", no);
+		
+		return count;
 		
 	}
 	
@@ -65,6 +67,18 @@ public class BoardDao {
 	public BoardVo getModifyForm(int no) {
 		//게시글 번호 받아서 해당 게시글의 내용을 데이터 베이스에서 가져와
 		return sqlSession.selectOne("board.getBoardByNo", no);
+		
+	}
+	
+	/* 게시글 수정 */
+	public int updateBoard(BoardVo boardVo) {
+		
+		int count = sqlSession.update("board.update", boardVo);
+		System.out.println("수정본 다오 동작:" + boardVo );
+		
+		
+		return count;
+		
 	}
 	
 	
